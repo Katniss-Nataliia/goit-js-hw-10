@@ -33,9 +33,10 @@ function renderBreedList(breeds,selectedBreed){
         return
         `
         <option value="${breed.id}" 
-    ${breed.id === selectedBreed ? 'selected' : ''}>
-      ${breed.name}
-    </option>`
+        ${breed.id === selectedBreed ? 'selected' : ''}>
+        ${breed.name}
+        </option>
+    `
     });
 
     breedSelect.innerHTML = breedOptions.join('');
