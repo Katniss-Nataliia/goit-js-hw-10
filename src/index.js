@@ -53,5 +53,39 @@ fetchBreeds()
 breedOptions.addEventListener('select', fetchCatByBreed);
 
 function fetchCatByBreed(breedId){
+
+    API.getBreeds()
+    .then(({breeds})=>{
+        if (breeds.length === 0) throw new Error("no data")
+        return breeds.reduce(
+            (markup, breeds) => createMarkup(breeds) + markup
+        )
+    })
+    .then (updateBreedsList)
+    .catch(onError)
     
+    
+}
+
+function createMarkup({name, description, temperament, urlImage}){
+    return`
+    <div class='breed-card'>
+
+    <h2 class = "breed-name">${name}</h2>
+    <p class = "breed-description">${description}</p>
+    <p class = "breed-temperament">${temperament}</p>
+    <img class = "breed-image" src=${urlImage}>
+
+    </div>
+    `
+
+}
+
+function updateBreedsList(markup){
+    document.getElementById("breedArticle").innerHTML = markup
+}
+
+function onError(err){
+    console.error(err.message);
+    updateBreedsList("<p>Articles not found</p>")
 }
