@@ -56,7 +56,7 @@ function fetchCatByBreed(breedId){
 
     API.getBreeds()
     .then(({breeds})=>{
-        if (breeds.length === 0) throw new Error("no data")
+        //  if (breeds.length === 0) throw new Error("no data")
         return breeds.reduce(
             (markup, breeds) => createMarkup(breeds) + markup
         )
@@ -87,5 +87,5 @@ function updateBreedsList(markup){
 
 function onError(err){
     console.error(err.message);
-    updateBreedsList("<p>Articles not found</p>")
+    return p.error
 }
