@@ -30,8 +30,7 @@ function fetchBreeds(){
 
 function renderBreedList(breeds,selectedBreed){
     const breedOptions = breeds.map(breed => {
-        return
-        `
+        return `
         <option value="${breed.id}" 
         ${breed.id === selectedBreed ? 'selected' : ''}>
         ${breed.name}
@@ -47,3 +46,12 @@ function renderBreedList(breeds,selectedBreed){
 fetchBreeds()
     .then(breeds => renderBreedList(breeds))
     .catch(error => console.error(error.message))
+
+
+//// Information about a cat
+
+breedOptions.addEventListener('select', fetchCatByBreed);
+
+function fetchCatByBreed(breedId){
+    
+}
