@@ -3,6 +3,10 @@ const api_key =
   'live_6IXeD3H0M3y8XHiFwmnVGQVVo3858OviQpENPwYIRdOJZFcVAShXPYpZAKlsMdiL';
 
 const breedSelect = document.querySelector('.breed-select');
+const pError = document.querySelector('.error');
+const loader = document.querySelector('.loader');
+
+pError.style.display = "none"
 
 breedSelect.addEventListener('change', () => {
   const selectedBreed = breedSelect.value;
@@ -47,8 +51,8 @@ fetchBreeds()
 
 breedSelect.addEventListener('change', fetchCatByBreed);
 
-function fetchCatByBreed() {
-  const breedId = breedSelect.value;
+function fetchCatByBreed(breedId) {
+    breedId = breedSelect.value;
 
   getBreeds(breedId)
     .then(({ breeds }) => {
@@ -56,6 +60,7 @@ function fetchCatByBreed() {
         (markup, breed) => createMarkup(breed) + markup,
         ''
       );
+      loader.style.display = "none";
       updateBreedsList(markup);
     })
     .catch(onError);
@@ -70,6 +75,8 @@ function createMarkup({ name, description, temperament, urlImage }) {
           <img class="breed-image" src=${urlImage}>
         </div>
       `;
+    
+      
 }
 
 function updateBreedsList(markup) {
@@ -77,5 +84,7 @@ function updateBreedsList(markup) {
 }
 
 function onError() {
-  return "p.error";
+  return pError.style.display="block"; 
+  
+
 }
