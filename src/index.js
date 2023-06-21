@@ -89,7 +89,7 @@ function createMarkup(cat) {
           <div><h2 class="breed-name">${cat.breeds[0].name}</h2>
           <p class="breed-description">${cat.breeds[0].description}</p>
           <p class="breed-temperament">${cat.breeds[0].temperament}</p></div>
-          <img class="breed-image"  src=${cat.url}>
+          <img class="breed-image" height = ${Number(cat.height)} width = ${Number(cat.width)} src=${cat.url}>
         </div>
       `;
 } 
