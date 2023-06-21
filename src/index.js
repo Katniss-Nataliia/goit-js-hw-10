@@ -99,7 +99,5 @@ function updateCatInfo(markup) {
 }
 
 function onError() {
-  return pError.style.display="block"; 
-  
-
+  return pError.style.display="block";
 }
