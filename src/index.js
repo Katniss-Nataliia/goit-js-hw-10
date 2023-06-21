@@ -1,3 +1,5 @@
+
+
 const endpoint = 'https://api.thecatapi.com/v1/breeds';
 const api_key =
   'live_6IXeD3H0M3y8XHiFwmnVGQVVo3858OviQpENPwYIRdOJZFcVAShXPYpZAKlsMdiL';
@@ -84,10 +86,10 @@ function createMarkup(cat) {
     
   return `
         <div class='breed-card'>
-          <h2 class="breed-name">${cat.breeds[0]}</h2>
-          <p class="breed-description">${description}</p>
-          <p class="breed-temperament">${temperament}</p>
-          <img class="breed-image" src=${url}>
+          <div><h2 class="breed-name">${cat.breeds[0].name}</h2>
+          <p class="breed-description">${cat.breeds[0].description}</p>
+          <p class="breed-temperament">${cat.breeds[0].temperament}</p></div>
+          <img class="breed-image"  src=${cat.url}>
         </div>
       `;
 }
