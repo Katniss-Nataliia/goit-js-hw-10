@@ -92,7 +92,7 @@ function createMarkup(cat) {
           <img class="breed-image"  src=${cat.url}>
         </div>
       `;
-}
+} 
 
 function updateCatInfo(markup) {
   catInfo.innerHTML = markup;
