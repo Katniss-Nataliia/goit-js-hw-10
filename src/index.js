@@ -5,6 +5,7 @@ const api_key =
 const breedSelect = document.querySelector('.breed-select');
 const pError = document.querySelector('.error');
 const loader = document.querySelector('.loader');
+const catInfo = document.querySelector('.cat-info');
 
 pError.style.display = "none"
 
@@ -53,34 +54,46 @@ breedSelect.addEventListener('change', fetchCatByBreed);
 
 function fetchCatByBreed(breedId) {
     breedId = breedSelect.value;
+    const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
+    loader.style.display = 'block';
 
-  getBreeds(breedId)
-    .then(({ breeds }) => {
-      const markup = breeds.reduce(
-        (markup, breed) => createMarkup(breed) + markup,
-        ''
-      );
-      loader.style.display = "none";
-      updateBreedsList(markup);
+    return fetch(url, {
+        headers:
+        {
+            'x-api-key': api_key,
+        },
+    })
+    .then(response => {
+        if (!response.ok){
+            throw new Error(response.message);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        const catImagesMarkup = data.map(cat => 
+            createMarkup(cat)).join('');
+        
+        loader.style.display = 'none';
+        updateCatInfo(catImagesMarkup);
     })
     .catch(onError);
 }
 
-function createMarkup({ name, description, temperament, urlImage }) {
+function createMarkup(cat) {
+    
   return `
         <div class='breed-card'>
-          <h2 class="breed-name">${name}</h2>
+          <h2 class="breed-name">${cat.breeds[0]}</h2>
           <p class="breed-description">${description}</p>
           <p class="breed-temperament">${temperament}</p>
-          <img class="breed-image" src=${urlImage}>
+          <img class="breed-image" src=${url}>
         </div>
       `;
-    
-      
 }
 
-function updateBreedsList(markup) {
-  document.getElementById('breedArticle').innerHTML = markup;
+function updateCatInfo(markup) {
+  catInfo.innerHTML = markup;
 }
 
 function onError() {
